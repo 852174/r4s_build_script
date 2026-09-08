@@ -227,6 +227,9 @@ sed -i '/ubus_parallel_req/a\        ubus_script_timeout 300;' feeds/packages/ne
 curl -s $mirror/openwrt/nginx/luci.locations > feeds/packages/net/nginx/files-luci-support/luci.locations
 curl -s $mirror/openwrt/nginx/uci.conf.template > feeds/packages/net/nginx-util/files/uci.conf.template
 
+# nginx-util
+sed -i '/\/etc\/nginx\/uci.conf.template/d' feeds/packages/net/nginx-util/Makefile
+
 # netifd
 curl -s $mirror/openwrt/patch/netifd/001-hack-packet_steering-for-nanopi-r76s.patch | patch -p1
 
@@ -263,6 +266,7 @@ pushd feeds/luci
     curl -s $mirror/openwrt/patch/luci/0005-luci-mod-system-add-refresh-interval-setting.patch | patch -p1
     curl -s $mirror/openwrt/patch/luci/0006-luci-mod-system-mounts-add-docker-directory-mount-po.patch | patch -p1
     curl -s $mirror/openwrt/patch/luci/0007-luci-mod-system-add-ucitrack-luci-mod-system-zram.js.patch | patch -p1
+    curl -s $mirror/openwrt/patch/luci/0008-luci-mod-status-dmesg-add-ANSI-terminal-color-and-re.patch | patch -p1
 popd
 
 # Luci diagnostics.js
